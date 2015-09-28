@@ -1,6 +1,6 @@
 {
-  "name": "redux-devtools-14",
-  "version": "2.1.6",
+  "name": "redux-devtools",
+  "version": "2.1.5",
   "description": "Redux DevTools with hot reloading and time travel",
   "main": "lib/index.js",
   "scripts": {
@@ -10,11 +10,11 @@
     "test": "NODE_ENV=test mocha --compilers js:babel/register --recursive",
     "test:watch": "NODE_ENV=test mocha --compilers js:babel/register --recursive --watch",
     "test:cov": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --recursive",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run lint && npm run test && npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomatau/redux-devtools.git"
+    "url": "https://github.com/gaearon/redux-devtools.git"
   },
   "keywords": [
     "redux",
@@ -24,12 +24,12 @@
     "time travel",
     "live edit"
   ],
-  "author": "Tom <tom@tomatao.co.uk> (http://github.com/tomatau)",
+  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tomatau/redux-devtools/issues"
+    "url": "https://github.com/gaearon/redux-devtools/issues"
   },
-  "homepage": "https://github.com/tomatau/redux-devtools",
+  "homepage": "https://github.com/gaearon/redux-devtools",
   "devDependencies": {
     "babel": "^5.5.8",
     "babel-core": "^5.6.18",

@@ -1,6 +1,6 @@
 {
   "name": "redux-devtools-14",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Redux DevTools with hot reloading and time travel",
   "main": "lib/index.js",
   "scripts": {

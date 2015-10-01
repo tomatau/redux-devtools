@@ -56,6 +56,7 @@ export default class LogMonitor extends Component {
     setMonitorState: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired,
     visibleOnLoad: PropTypes.bool,
+    actionTypeFilters: PropTypes.array,
     theme: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string
@@ -66,7 +67,8 @@ export default class LogMonitor extends Component {
     select: (state) => state,
     monitorState: { isVisible: true },
     theme: 'nicinabox',
-    visibleOnLoad: true
+    visibleOnLoad: true,
+    actionTypeFilters: []
   };
 
   componentWillReceiveProps(nextProps) {
@@ -141,7 +143,7 @@ export default class LogMonitor extends Component {
 
   render() {
     const elements = [];
-    const { monitorState, skippedActions, stagedActions, computedStates, select } = this.props;
+    const { monitorState, skippedActions, stagedActions, computedStates, select, actionTypeFilters } = this.props;
     let theme;
     if (typeof this.props.theme === 'string') {
       if (typeof themes[this.props.theme] !== 'undefined') {
@@ -157,12 +159,18 @@ export default class LogMonitor extends Component {
       return null;
     }
 
+    actionLoop:
     for (let i = 0; i < stagedActions.length; i++) {
       const action = stagedActions[i];
       const { state, error } = computedStates[i];
       let previousState;
       if (i > 0) {
         previousState = computedStates[i - 1].state;
+      }
+      for (var j = 0; j < actionTypeFilters.length; j++) {
+        if (actionTypeFilters[j].test(action.type)) {
+          continue actionLoop;
+        }
       }
       elements.push(
         <LogMonitorEntry key={i}
